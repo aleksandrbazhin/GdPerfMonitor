@@ -10,7 +10,7 @@ It may have some performance overhead (not measured), but for FPS or memory moni
 
 ### Usage
 
-- Copy folder anywhere to your project
+- Copy PerfMonitor/ dir anywhere to your project
 
 - Add scene PerfMonitor.tscn to your project's main scene ![](add_scene.gif)
 
