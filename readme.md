@@ -39,7 +39,7 @@ It may have some performance overhead (not measured), but for FPS or memory moni
 **/PerfMonitor/*
 ```
 
-Also you can set plot size, color or amount of plot stored data.  There are some commented examples PerfMonitor.gd.
+Also you can set plot size, color, or amount of plot stored data.  There are some commented examples PerfMonitor.gd.
 
 ### Other notes
 
