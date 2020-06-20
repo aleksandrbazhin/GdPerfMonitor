@@ -4,7 +4,7 @@ Simple node for live monitoring of FPS, memory usage and such, loosely styled by
 
 Also has the ability to monitor passed object's chosen parameter.
 
-![That's how it looks](perf.gif)
+![That's how it looks](monitor.gif)
 
 It may have some performance overhead (not measured), but for FPS or memory monitoring it seems insignificant.
 
@@ -12,7 +12,7 @@ It may have some performance overhead (not measured), but for FPS or memory moni
 
 - Copy folder anywhere to your project
 
-- Add scene PerfMonitor.tscn to your project's main scene ![](perf2.gif)
+- Add scene PerfMonitor.tscn to your project's main scene ![](add_scene.gif)
 
 - Setup what to monitor 
 
