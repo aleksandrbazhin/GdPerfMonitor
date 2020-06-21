@@ -10,7 +10,7 @@ It may have some performance overhead (not measured), but for FPS or memory moni
 
 ### Usage
 
-- Copy PerfMonitor/ dir anywhere to your project
+- Copy PerfMonitor/ dir to the root of your project
 
 - Add scene PerfMonitor.tscn to your project's main scene ![](add_scene.gif)
 
@@ -20,7 +20,7 @@ It may have some performance overhead (not measured), but for FPS or memory moni
 
     ```python
     func _ready():
-    	add_perf_monitor(Performance.TIME_FPS, "FPS")
+        add_perf_monitor(Performance.TIME_FPS, "FPS")
     ```
 
     the keys of built-in Performance enum are found here https://docs.godotengine.org/ru/stable/classes/class_performance.html
@@ -29,8 +29,8 @@ It may have some performance overhead (not measured), but for FPS or memory moni
 
     ```python
     func _ready():
-    	$PerfMonitor.add_custom_monitor($Player, "hitpoints", "Player hp")
-    	# your $Player node must have "hitpoints" attribute, which must be either float or int
+        $PerfMonitor.add_custom_monitor($Player, "hitpoints", "Player hp")
+        # your $Player node must have "hitpoints" attribute, which must be either float or int
     ```
 
 - Don't forget to add to .gitignore if you are using git something like
@@ -46,8 +46,8 @@ Also you can set plot size, color, or amount of plot stored data.  There are som
 Added another kind of plot - funcref monitor which will call a function provided by passed FuncRef each frame. Example usage:
 
 ```python
-    var render_info_funcref: FuncRef = funcref(VisualServer, "get_render_info")
-	add_funcref_monitor(render_info_funcref, [VisualServer.INFO_TEXTURE_MEM_USED], 
+var render_info_funcref: FuncRef = funcref(VisualServer, "get_render_info")
+add_funcref_monitor(render_info_funcref, [VisualServer.INFO_TEXTURE_MEM_USED], 
 		"Texture mem", Color(0.9, 0.9, 0.9, 0.6), true)
 ```
 
@@ -65,5 +65,7 @@ What may be optimized (questionable):
 
 - Not redraw plots every frame, but draw on texture, shift it and add one line each redraw
 - ~~Make less checks every frame by subclassing custom plot and performance plot from base plot~~ Done
-- Rewrite drawing with GDNative
+- Rewrite drawing with GDNative?
+- Make it a plugin
+
 
