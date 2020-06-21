@@ -29,8 +29,8 @@ It may have some performance overhead (not measured), but for FPS or memory moni
 
     ```python
     func _ready():
-    	$PerfMonitor.add_custom_monitor($Player, "hitpoints", "Player hp")
-    	# your $Player node must have "hitpoints" attribute, which must be either float or int
+        $PerfMonitor.add_custom_monitor($Player, "hitpoints", "Player hp")
+        # your $Player node must have "hitpoints" attribute, which must be either float or int
     ```
 
 - Don't forget to add to .gitignore if you are using git something like
@@ -46,8 +46,8 @@ Also you can set plot size, color, or amount of plot stored data.  There are som
 Added another kind of plot - funcref monitor which will call a function provided by passed FuncRef each frame. Example usage:
 
 ```python
-    var render_info_funcref: FuncRef = funcref(VisualServer, "get_render_info")
-	add_funcref_monitor(render_info_funcref, [VisualServer.INFO_TEXTURE_MEM_USED], 
+var render_info_funcref: FuncRef = funcref(VisualServer, "get_render_info")
+add_funcref_monitor(render_info_funcref, [VisualServer.INFO_TEXTURE_MEM_USED], 
 		"Texture mem", Color(0.9, 0.9, 0.9, 0.6), true)
 ```
 
