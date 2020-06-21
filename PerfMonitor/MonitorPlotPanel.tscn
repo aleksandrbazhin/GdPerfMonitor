@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://scenes/UI/PerfMonitor/MonitorFont.tres" type="DynamicFont" id=1]
-[ext_resource path="res://scenes/UI/PerfMonitor/MonitorPlotPanel.gd" type="Script" id=2]
+[ext_resource path="res://PerfMonitor/MonitorFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://PerfMonitor/MonitorPlotPanel.gd" type="Script" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.266667, 0.317647, 0.34902, 0.913725 )
