@@ -5,6 +5,8 @@ class_name MonitorPlotPanel
 const DEFAULT_SIZE: Vector2 = Vector2(180, 120)
 const DEFAULT_LEN: int = 180
 const DEFAULT_COLOR: Color = Color(0.2, 1, 0.2, 0.5)
+const BG_COLOR: Color = Color(0.27, 0.32, 0.35, 0.91)
+
 
 var plot_data_int: PoolIntArray = []
 var plot_data_float: PoolRealArray = []
@@ -15,13 +17,16 @@ var plot_color: Color = DEFAULT_COLOR
 var is_mem_size: bool = false
 
 var data_label: String = "FPS"
-#var perf_monitor_key: int = Performance.TIME_FPS
 var graph_size: Vector2 = DEFAULT_SIZE
 var perf_data_max: float = 0.0
 var data_scale: float = 2.0
 var range_scale: float = 1.0
 
 var plot_offset: int = 0
+var plot_image: Image
+var plot_image_texture: ImageTexture
+var plot_image_blit_rect: Rect2 = Rect2(Vector2.ZERO, Vector2.ZERO)
+
 
 onready var label_node: Label = $Label
 onready var plot_data_array = plot_data_int
@@ -43,6 +48,14 @@ func init_plot(label: String, data_max: float, plot_length_frames: int = DEFAULT
 	else:
 		plot_data_array = plot_data_float
 	init_data_array()
+	
+	plot_image = Image.new()
+	plot_image.create(int(rect_min_size.x), int(rect_min_size.y), false, Image.FORMAT_RGBA8)
+	plot_image_texture = ImageTexture.new()
+	plot_image_texture.create_from_image(plot_image)
+	plot_image_blit_rect.size = Vector2(rect_min_size.x - 1.0, rect_min_size.y)
+	plot_image_blit_rect.position = Vector2(1.0, 0.0)
+
 
 
 func resize_height():
@@ -93,15 +106,15 @@ func _draw():
 	if plot_data_array.size() == 0:
 		print("ERROR: PLOT WAS NOT SET UP ", name)
 		return
-	var draw_pointer: int = plot_pointer 
-	var line_from: Vector2 = Vector2(0, graph_size.y + plot_offset)
-	var line_to: Vector2 = Vector2(0, 0)
-	for i in range(plot_len):
-		line_from.x = (i + 1) * range_scale
-		line_to.x = line_from.x
-		line_to.y = plot_offset + graph_size.y - data_scale * plot_data_array[draw_pointer]
-		draw_line(line_from, line_to, plot_color, range_scale)
-		if draw_pointer < plot_len - 1:
-			draw_pointer += 1
+
+	plot_image.lock()
+	plot_image.blit_rect(plot_image, plot_image_blit_rect, Vector2.ZERO)
+	var line_start = graph_size.y + plot_offset - data_scale*plot_data_array[plot_pointer - 1]
+	for i in range(graph_size.y):
+		if i > line_start:
+			plot_image.set_pixel(179, i, plot_color)
 		else:
-			draw_pointer = 0
+			plot_image.set_pixel(179, i, BG_COLOR)
+	plot_image.unlock()
+	plot_image_texture.set_data(plot_image)
+	draw_texture(plot_image_texture, Vector2.ZERO)
