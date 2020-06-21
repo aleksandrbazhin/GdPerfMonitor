@@ -6,7 +6,7 @@ Also has the ability to monitor passed object's chosen parameter.
 
 ![That's how it looks](monitor.gif)
 
-It may have some performance overhead (not measured), but for FPS or memory monitoring it seems insignificant.
+It may have some performance overhead, but for FPS or memory monitoring it seems insignificant. **Update**: on my machine each plot takes 0.15-0.2 ms to render, the version in **[texture_faster_drawing](https://github.com/aleksandrbazhin/GdPerfMonitor/tree/texture_faster_drawing)** branch works around 2x faster, but the code is not tested.
 
 ### Usage
 
@@ -20,7 +20,7 @@ It may have some performance overhead (not measured), but for FPS or memory moni
 
     ```python
     func _ready():
-    	add_perf_monitor(Performance.TIME_FPS, "FPS")
+        add_perf_monitor(Performance.TIME_FPS, "FPS")
     ```
 
     the keys of built-in Performance enum are found here https://docs.godotengine.org/ru/stable/classes/class_performance.html
@@ -29,7 +29,7 @@ It may have some performance overhead (not measured), but for FPS or memory moni
 
     ```python
     func _ready():
-    	$PerfMonitor.add_custom_monitor($Player, "hitpoints", "Player hp")
+        $PerfMonitor.add_custom_monitor($Player, "hitpoints", "Player hp")
     	# your $Player node must have "hitpoints" attribute, which must be either float or int
     ```
 
@@ -46,9 +46,7 @@ Also you can set plot size, color, or amount of plot stored data.  There are som
 Added another kind of plot - funcref monitor which will call a function provided by passed FuncRef each frame. Example usage:
 
 ```python
-    var render_info_funcref: FuncRef = funcref(VisualServer, "get_render_info")
-	add_funcref_monitor(render_info_funcref, [VisualServer.INFO_TEXTURE_MEM_USED], 
-		"Texture mem", Color(0.9, 0.9, 0.9, 0.6), true)
+add_funcref_monitor(funcref(VisualServer, "get_render_info"), [VisualServer.INFO_TEXTURE_MEM_USED])
 ```
 
 Only the first parameter to add_funcref_monitor (FuncRef itself ) is required, second parameter is Array of function call parameters, by default is empty. 
@@ -57,13 +55,17 @@ Only the first parameter to add_funcref_monitor (FuncRef itself ) is required, s
 
 The draw call happens on _process, so update rate may be not constant.
 
-The plot uses some kind of ring buffer based on PoolIntArray or PoolRealArray for storing data. 
-
-There certainly are further optimizations, as I've wrote it during couple of night hours and then spent more time on making the gif in this readme.
+~~The plot uses some kind of ring buffer based on PoolIntArray or PoolRealArray for storing data.~~ Previous plot data is stored in Image.
 
 What may be optimized (questionable):
 
-- Not redraw plots every frame, but draw on texture, shift it and add one line each redraw
+- ~~Not redraw plots every frame, but draw on texture, shift it and add one line each redraw~~ Done in branch
+
 - ~~Make less checks every frame by subclassing custom plot and performance plot from base plot~~ Done
-- Rewrite drawing with GDNative
+
+- Publish as a plugin
+
+- Rewrite rendering with GDNative?
+
+  
 
