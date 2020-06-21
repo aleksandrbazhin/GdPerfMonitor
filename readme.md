@@ -39,7 +39,19 @@ It may have some performance overhead (not measured), but for FPS or memory moni
 **/PerfMonitor/*
 ```
 
-Also you can set plot size, color, or amount of plot stored data.  There are some commented examples PerfMonitor.gd.
+Also you can set plot size, color, or amount of plot stored data.  There are some commented examples PerfMonitor.gd
+
+**Update**:
+
+Added another kind of plot - funcref monitor which will call a function provided by passed FuncRef each frame. Example usage:
+
+```python
+    var render_info_funcref: FuncRef = funcref(VisualServer, "get_render_info")
+	add_funcref_monitor(render_info_funcref, [VisualServer.INFO_TEXTURE_MEM_USED], 
+		"Texture mem", Color(0.9, 0.9, 0.9, 0.6), true)
+```
+
+Only the first parameter to add_funcref_monitor (FuncRef itself ) is required, second parameter is Array of function call parameters, by default is empty. 
 
 ### Other notes
 
@@ -52,6 +64,6 @@ There certainly are further optimizations, as I've wrote it during couple of nig
 What may be optimized (questionable):
 
 - Not redraw plots every frame, but draw on texture, shift it and add one line each redraw
-- Make less checks every frame by subclassing custom plot and performance plot from base plot
+- ~~Make less checks every frame by subclassing custom plot and performance plot from base plot~~ Done
 - Rewrite drawing with GDNative
 

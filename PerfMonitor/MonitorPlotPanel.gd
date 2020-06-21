@@ -1,6 +1,6 @@
 extends Panel
 
-class_name PerfPlotPanel
+class_name MonitorPlotPanel
 
 const DEFAULT_SIZE: Vector2 = Vector2(180, 120)
 const DEFAULT_LEN: int = 180
@@ -15,7 +15,7 @@ var plot_color: Color = DEFAULT_COLOR
 var is_mem_size: bool = false
 
 var data_label: String = "FPS"
-var perf_monitor_key: int = Performance.TIME_FPS
+#var perf_monitor_key: int = Performance.TIME_FPS
 var graph_size: Vector2 = DEFAULT_SIZE
 var perf_data_max: float = 0.0
 var data_scale: float = 2.0
@@ -25,33 +25,6 @@ var plot_offset: int = 0
 
 onready var label_node: Label = $Label
 onready var plot_data_array = plot_data_int
-
-var is_custom_monitor: bool = false
-var custom_object_ref: WeakRef = null
-var custom_object_parameter: String = ""
-
-
-func setup_custom_plot(object: Object, param_name: String, label: String, data_max: float,  
-		plot_length_frames: int, color: Color, size: Vector2, 
-		is_data_int: bool = true, is_humanise_needed: bool = false):
-	is_custom_monitor = true
-	if is_instance_valid(object):
-		custom_object_ref = weakref(object)
-		var object_param = object.get(param_name)
-		if object_param != null and [TYPE_INT, TYPE_REAL].has(typeof(object_param)):
-			custom_object_parameter = param_name
-		else:
-			print("ERROR: passed non-number parameter to perf monitor")
-	else: 
-		print("ERROR: passed null object to perf monitor")
-	init_plot(label, data_max, plot_length_frames, color, size, is_data_int, is_humanise_needed)
-
-
-func setup_plot(monitor_key: int, label: String, data_max: float, 
-		plot_length_frames: int = DEFAULT_LEN, color: Color = DEFAULT_COLOR, 
-		size: Vector2 = DEFAULT_SIZE,  is_data_int: bool = true, is_humanise_needed: bool = false):
-	perf_monitor_key = monitor_key
-	init_plot(label, data_max, plot_length_frames, color, size, is_data_int, is_humanise_needed)
 
 
 func init_plot(label: String, data_max: float, plot_length_frames: int = DEFAULT_LEN, 
@@ -97,16 +70,12 @@ func init_data_array():
 	for i in range(plot_len):
 		plot_data_array[i] = 0
 
+func get_data():
+	return 0.0
 
 func _process(_delta):
 	resize_height()
-	if not is_custom_monitor:
-		plot_last_data = Performance.get_monitor(perf_monitor_key)
-	else:
-		if is_instance_valid(custom_object_ref.get_ref()):
-			plot_last_data = custom_object_ref.get_ref().get(custom_object_parameter)
-		else:
-			plot_last_data = 0
+	plot_last_data = get_data()
 	if plot_last_data > perf_data_max:
 		reset_max_data(plot_last_data)
 	label_node.text = "%s: " % data_label + get_data_str(plot_last_data)
