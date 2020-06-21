@@ -7,16 +7,16 @@ const DEFAULT_PLOT_SIZE: Vector2 = Vector2(180, 80)
 const DEFAULT_DATA_MAX: float = 1.0
 #var 
 
-onready var plot_scene: PackedScene = load(get_script().get_path().get_base_dir() + "/PerfPlotPanel.tscn")
+onready var plot_scene: PackedScene = preload("PerfPlotPanel.tscn")
 
 func _ready():
-#	add_perf_monitor(Performance.TIME_FPS, "FPS")
-	add_perf_monitor(Performance.TIME_PROCESS, "Time process, s", 
-		Color(0.9, 0.9, 0.9, 0.6), false, false, 0.0001)
-	add_perf_monitor(Performance.MEMORY_DYNAMIC, "Dyn mem", 
-		Color(0.8, 0.7, 0.2, 0.4), true)
-	add_perf_monitor(Performance.MEMORY_STATIC, "Stat mem", 
-		Color(0.2, 0.5, 0.8, 0.4), true, 360)
+	add_perf_monitor(Performance.TIME_FPS, "FPS")
+#	add_perf_monitor(Performance.TIME_PROCESS, "Time process, s", 
+#		Color(0.9, 0.9, 0.9, 0.6), false, false, 0.0001)
+#	add_perf_monitor(Performance.MEMORY_DYNAMIC, "Dyn mem", 
+#		Color(0.8, 0.7, 0.2, 0.4), true)
+#	add_perf_monitor(Performance.MEMORY_STATIC, "Stat mem", 
+#		Color(0.2, 0.5, 0.8, 0.4), true, 360)
 
 func add_perf_monitor(param_key: int, 
 					label: String = "",  
