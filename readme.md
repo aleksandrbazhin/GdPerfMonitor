@@ -10,7 +10,7 @@ It may have some performance overhead (not measured), but for FPS or memory moni
 
 ### Usage
 
-- Copy PerfMonitor/ dir anywhere to your project
+- Copy PerfMonitor/ dir to the root of your project
 
 - Add scene PerfMonitor.tscn to your project's main scene ![](add_scene.gif)
 
@@ -65,5 +65,7 @@ What may be optimized (questionable):
 
 - Not redraw plots every frame, but draw on texture, shift it and add one line each redraw
 - ~~Make less checks every frame by subclassing custom plot and performance plot from base plot~~ Done
-- Rewrite drawing with GDNative
+- Rewrite drawing with GDNative?
+- Make it a plugin
+
 
