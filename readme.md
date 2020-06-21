@@ -20,7 +20,7 @@ It may have some performance overhead (not measured), but for FPS or memory moni
 
     ```python
     func _ready():
-    	add_perf_monitor(Performance.TIME_FPS, "FPS")
+        add_perf_monitor(Performance.TIME_FPS, "FPS")
     ```
 
     the keys of built-in Performance enum are found here https://docs.godotengine.org/ru/stable/classes/class_performance.html
