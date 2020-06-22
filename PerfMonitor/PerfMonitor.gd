@@ -1,10 +1,8 @@
 extends CanvasLayer
 
 
-const DEFAULT_DATA_LEN: int = 180 # in frames of _process
 const DEFAULT_PLOT_COLOR: Color = Color(0.2, 1, 0.2, 0.5)
 const DEFAULT_DATA_MAX: float = 1.0
-
 
 onready var plot_scene_perf: PackedScene = preload("MonitorPlotPanelPerf.tscn")
 onready var plot_scene_custom: PackedScene = preload("MonitorPlotPanelObjParam.tscn")
@@ -24,6 +22,10 @@ func _ready():
 		"Texture mem", Color(0.9, 0.9, 0.9, 0.6), true)
 	add_funcref_monitor(render_info_funcref, [VisualServer.INFO_2D_DRAW_CALLS_IN_FRAME], 
 		"Draw calls", Color(0.2, 0.5, 0.8, 0.4))
+	var ever_growing: FuncRef = funcref(OS, "get_ticks_msec")
+	add_funcref_monitor(ever_growing, [], 
+		"Tick msecs", Color(0.2, 0.5, 0.8, 0.4))
+
 
 
 func add_perf_monitor(param_key: int, 
