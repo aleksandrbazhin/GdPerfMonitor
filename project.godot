@@ -13,27 +13,9 @@ _global_script_classes=[ {
 "class": "MonitorPlotPanel",
 "language": "GDScript",
 "path": "res://PerfMonitor/MonitorPlotPanel.gd"
-}, {
-"base": "MonitorPlotPanel",
-"class": "MonitorPlotPanelFuncref",
-"language": "GDScript",
-"path": "res://PerfMonitor/MonitorPlotPanelFuncref.gd"
-}, {
-"base": "MonitorPlotPanel",
-"class": "MonitorPlotPanelObjParam",
-"language": "GDScript",
-"path": "res://PerfMonitor/MonitorPlotPanelObjParam.gd"
-}, {
-"base": "MonitorPlotPanel",
-"class": "MonitorPlotPanelPerf",
-"language": "GDScript",
-"path": "res://PerfMonitor/MonitorPlotPanelPerf.gd"
 } ]
 _global_script_class_icons={
-"MonitorPlotPanel": "",
-"MonitorPlotPanelFuncref": "",
-"MonitorPlotPanelObjParam": "",
-"MonitorPlotPanelPerf": ""
+"MonitorPlotPanel": ""
 }
 
 [application]
