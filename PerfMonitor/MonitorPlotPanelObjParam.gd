@@ -1,9 +1,6 @@
 extends MonitorPlotPanel
 
 
-class_name MonitorPlotPanelObjParam
-
-
 var is_custom_monitor: bool = false
 var custom_object_ref: WeakRef = null
 var custom_object_parameter: String = ""

@@ -1,9 +1,6 @@
 extends MonitorPlotPanel
 
 
-class_name MonitorPlotPanelPerf
-
-
 var perf_monitor_key: int = Performance.TIME_FPS
 
 

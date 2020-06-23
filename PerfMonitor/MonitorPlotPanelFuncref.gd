@@ -1,9 +1,6 @@
 extends MonitorPlotPanel
 
 
-class_name MonitorPlotPanelFuncref
-
-
 var is_funcref_monitor: bool = false
 var custom_funcref: FuncRef = null
 var custom_funcref_params: Array = []

@@ -35,7 +35,7 @@ func add_perf_monitor(param_key: int,
 					max_value: float = DEFAULT_DATA_MAX,
 					data_len: int = DEFAULT_DATA_LEN, 
 					size_px: Vector2 = DEFAULT_PLOT_SIZE):
-	var new_plot: MonitorPlotPanelPerf = plot_scene_perf.instance()
+	var new_plot: MonitorPlotPanel = plot_scene_perf.instance()
 	$Margin/HBox.add_child(new_plot)
 	new_plot.setup_plot(param_key, label, max_value, data_len, color, size_px, is_data_int, humanise)
 
@@ -48,7 +48,7 @@ func add_custom_monitor(obj: Object, param_name: String,
 					max_value: float = DEFAULT_DATA_MAX,
 					data_len: int = DEFAULT_DATA_LEN, 
 					size_px: Vector2 = DEFAULT_PLOT_SIZE):
-	var new_plot: MonitorPlotPanelObjParam = plot_scene_custom.instance()
+	var new_plot: MonitorPlotPanel = plot_scene_custom.instance()
 	$Margin/HBox.add_child(new_plot)
 	new_plot.setup_plot(obj, param_name, label, max_value, data_len, color, size_px, is_data_int, humanise)
 
@@ -61,6 +61,6 @@ func add_funcref_monitor(function_ref: FuncRef, function_params: Array = [],
 					max_value: float = DEFAULT_DATA_MAX,
 					data_len: int = DEFAULT_DATA_LEN, 
 					size_px: Vector2 = DEFAULT_PLOT_SIZE):
-	var new_plot: MonitorPlotPanelFuncref = plot_scene_funcref.instance()
+	var new_plot: MonitorPlotPanel = plot_scene_funcref.instance()
 	$Margin/HBox.add_child(new_plot)
 	new_plot.setup_plot(function_ref, function_params, label, max_value, data_len, color, size_px, is_data_int, humanise)
