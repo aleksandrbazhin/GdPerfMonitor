@@ -2,9 +2,9 @@ extends Panel
 
 class_name MonitorPlotPanel
 
-const DEFAULT_SIZE: Vector2 = Vector2(180, 120)
-const DEFAULT_LEN: int = 180
-const DEFAULT_COLOR: Color = Color(0.2, 1, 0.2, 0.5)
+const DEFAULT_SIZE: = Vector2(180, 120)
+const DEFAULT_LEN: = 180
+const DEFAULT_COLOR: = Color(0.2, 1, 0.2, 0.5)
 
 var plot_data_int: PoolIntArray = []
 var plot_data_float: PoolRealArray = []
@@ -17,11 +17,11 @@ var is_mem_size: bool = false
 var data_label: String = "FPS"
 #var perf_monitor_key: int = Performance.TIME_FPS
 var graph_size: Vector2 = DEFAULT_SIZE
-var perf_data_max: float = 0.0
-var data_scale: float = 2.0
-var range_scale: float = 1.0
+var perf_data_max: = 0.0
+var data_scale: = 2.0
+var range_scale: = 1.0
 
-var plot_offset: int = 0
+var plot_offset: = 0
 
 onready var label_node: Label = $Label
 onready var plot_data_array = plot_data_int

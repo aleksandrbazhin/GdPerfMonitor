@@ -1,10 +1,10 @@
 extends CanvasLayer
 
 
-const DEFAULT_DATA_LEN: int = 180 # in frames of _process
-const DEFAULT_PLOT_COLOR: Color = Color(0.2, 1, 0.2, 0.5)
-const DEFAULT_PLOT_SIZE: Vector2 = Vector2(180, 80)
-const DEFAULT_DATA_MAX: float = 1.0
+const DEFAULT_DATA_LEN: = 180 # in frames of _process calls
+const DEFAULT_PLOT_COLOR: = Color(0.2, 1, 0.2, 0.5)
+const DEFAULT_PLOT_SIZE: = Vector2(180, 80)
+const DEFAULT_DATA_MAX: = 1.0
 
 
 onready var plot_scene_perf: PackedScene = preload("MonitorPlotPanelPerf.tscn")
