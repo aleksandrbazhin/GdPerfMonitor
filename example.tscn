@@ -3,7 +3,7 @@
 [ext_resource path="res://example.gd" type="Script" id=1]
 [ext_resource path="res://addons/PerfMonitor/PerfMonitor.gd" type="Script" id=2]
 
-[node name="Node2D" type="Control"]
+[node name="Control" type="Control"]
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false

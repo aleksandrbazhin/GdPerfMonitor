@@ -125,7 +125,7 @@ func _draw():
 
 
 func _on_MonitorPlotPanel_gui_input(event):
-	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
+	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
 		for i in range(plot_len):
 			plot_data_array[i] = 0.0
 		reset_max_data(get_data())
