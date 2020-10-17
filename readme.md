@@ -28,7 +28,7 @@ Can display any **numeric** object parameter or function call result.
     ```
   - ```python  
       var render_info_funcref: FuncRef = funcref(VisualServer, "get_render_info")
-      $Monitor.add_funcref_monitor(render_info_funcref [VisualServer.INFO_TEXTURE_MEM_USED], "Texture mem")
+      $Monitor.add_funcref_monitor(render_info_funcref, [VisualServer.INFO_TEXTURE_MEM_USED], "Texture mem")
       ```
 
 Also you can set plot size, color, or amount of plot stored data, check out example.gd.
