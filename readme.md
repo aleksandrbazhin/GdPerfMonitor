@@ -1,6 +1,6 @@
 # Performance monitor node for Godot
 
-Simple node for live monitoring of FPS, memory usage and such, loosely styled by Three.js's performance monitor.
+Simple node for in-game monitoring of FPS, memory usage and such, loosely styled by Three.js's performance monitor.
 
 ![Example ](\screens\monitor.gif)
 
@@ -39,15 +39,15 @@ Convenience function `$Monitor.os_time_per_frame()`, creates a monitor to show d
 
 
 - ```
-  os_time_perframe() - creates a plot panel to show difference between OS.get_ticks_usec() calls
+os_time_perframe() - creates a plot panel to show difference between OS.get_ticks_usec() calls
   ```
 
 
 - ```
-  add_perf_monitor() - creates a plot panel to monitor one of the built-in Performance enum 
+add_perf_monitor() - creates a plot panel to monitor one of the built-in Performance enum 
   
 	# required
-  param_key: int - key from Performance enum 
+	param_key: int - key from Performance enum 
 	
 	# optional	
 	label: String = "" - label to display
@@ -55,17 +55,17 @@ Convenience function `$Monitor.os_time_per_frame()`, creates a monitor to show d
 	humanise: bool = false - whether to use humanize for large numbers
 	is_data_int: bool = true - !important for floats change to false
 	max_value: float = 0.0 - maximum value
-  data_len: int = 180 
-  size_px: Vector2 = Vector2(180, 80)
+	data_len: int = 180 
+	size_px: Vector2 = Vector2(180, 80)
   ```
 
 
 - ```
-  add_custom_monitor() - creates a plot panel to monitor one of the passed objects' numeric attributes
+add_custom_monitor() - creates a plot panel to monitor one of the passed objects' numeric attributes
   
 	# required
 	obj: Object - object to monitor
-  param_name: String - name of numeric attribute of the object above
+	param_name: String - name of numeric attribute of the object above
 	
 	# optional	
 	label: String = "" - label to display
@@ -73,16 +73,16 @@ Convenience function `$Monitor.os_time_per_frame()`, creates a monitor to show d
 	humanise: bool = false - whether to use humanize for large numbers
 	is_data_int: bool = true - !important for floats change to false
 	max_value: float = 0.0 - maximum value
-  data_len: int = 180 
-  size_px: Vector2 = Vector2(180, 80)
+	data_len: int = 180 
+	size_px: Vector2 = Vector2(180, 80)
   ```
 
 
 - ```
-  add_funcref_monitor() - creates a plot panel to monitor results of the calls to the passed function
+add_funcref_monitor() - creates a plot panel to monitor results of the calls to the passed function
   
 	# required
-  function_ref: FuncRef - funcref to a function that will be called every _process()
+	function_ref: FuncRef - funcref to a function that will be called every _process()
 	
 	# optional	
 	function_params: Array = [] - array of function param values
@@ -91,8 +91,8 @@ Convenience function `$Monitor.os_time_per_frame()`, creates a monitor to show d
 	humanise: bool = false - whether to use humanize for large numbers
 	is_data_int: bool = true - !important for floats change to false
 	max_value: float = 0.0 - maximum value
-  data_len: int = 180 
-  size_px: Vector2 = Vector2(180, 80)
+	data_len: int = 180 
+	size_px: Vector2 = Vector2(180, 80)
   ```
   
 
