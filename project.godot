@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Panel",
 "class": "MonitorPlotPanel",
 "language": "GDScript",
-"path": "res://PerfMonitor/MonitorPlotPanel.gd"
+"path": "res://addons/PerfMonitor/MonitorPlotPanel.gd"
 } ]
 _global_script_class_icons={
 "MonitorPlotPanel": ""
@@ -21,8 +21,12 @@ _global_script_class_icons={
 [application]
 
 config/name="PerfMonitor"
-run/main_scene="res://PerfMonitor/PerfMonitor.tscn"
+run/main_scene="res://example.tscn"
 config/icon="res://icon.png"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "PerfMonitor" )
 
 [rendering]
 

@@ -1,6 +1,8 @@
 extends Panel
 
+
 class_name MonitorPlotPanel
+
 
 const MIN_DATA_MAX: = 0.0001
 const DEFAULT_MIN_DATA: = 1000000.0
@@ -17,13 +19,11 @@ var plot_color: Color = DEFAULT_COLOR
 var is_mem_size: bool = false
 
 var data_label: String = "FPS"
-#var perf_monitor_key: int = Performance.TIME_FPS
 var graph_size: Vector2 = DEFAULT_SIZE
 var perf_data_max: = 0.0
 var perf_data_min: = 1.0
 var data_scale: = 2.0
 var range_scale: = 1.0
-
 var plot_offset: = 0
 
 onready var label_node: Label = $Label
@@ -65,9 +65,11 @@ func reset_max_data(data_max: float):
 	update_scale()
 	label_max_node.text = "max: " + get_data_str(perf_data_max)
 
+
 func reset_min_data(data_min: float):
 	perf_data_min = data_min
 	label_min_node.text = "min: " + get_data_str(perf_data_min)
+
 
 func update_scale():
 	if perf_data_max == 0.0:
