@@ -39,12 +39,12 @@ Convenience function `$Monitor.os_time_per_frame()`, creates a monitor to show d
 
 
 - ```
-os_time_perframe() - creates a plot panel to show difference between OS.get_ticks_usec() calls
+	os_time_perframe() - creates a plot panel to show difference between OS.get_ticks_usec() calls
   ```
 
 
 - ```
-add_perf_monitor() - creates a plot panel to monitor one of the built-in Performance enum 
+	add_perf_monitor() - creates a plot panel to monitor one of the built-in Performance enum 
   
 	# required
 	param_key: int - key from Performance enum 
@@ -61,7 +61,7 @@ add_perf_monitor() - creates a plot panel to monitor one of the built-in Perform
 
 
 - ```
-add_custom_monitor() - creates a plot panel to monitor one of the passed objects' numeric attributes
+	add_custom_monitor() - creates a plot panel to monitor one of the passed objects' numeric attributes
   
 	# required
 	obj: Object - object to monitor
@@ -79,7 +79,7 @@ add_custom_monitor() - creates a plot panel to monitor one of the passed objects
 
 
 - ```
-add_funcref_monitor() - creates a plot panel to monitor results of the calls to the passed function
+	add_funcref_monitor() - creates a plot panel to monitor results of the calls to the passed function
   
 	# required
 	function_ref: FuncRef - funcref to a function that will be called every _process()
@@ -98,7 +98,7 @@ add_funcref_monitor() - creates a plot panel to monitor results of the calls to 
 
 ### Other notes
 
-The draw call happens on _process, so update rate may be not constant.
+The draw call happens in _process(), so update rate may be not constant.
 
 The plot uses some kind of ring buffer based on PoolIntArray or PoolRealArray for storing data. 
 
