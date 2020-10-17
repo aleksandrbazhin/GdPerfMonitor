@@ -2,6 +2,8 @@ extends Panel
 
 class_name MonitorPlotPanel
 
+const MIN_DATA_MAX: = 0.0001
+const DEFAULT_MIN_DATA: = 1000000.0
 const DEFAULT_SIZE: = Vector2(180, 120)
 const DEFAULT_LEN: = 180
 const DEFAULT_COLOR: = Color(0.2, 1, 0.2, 0.5)
@@ -18,12 +20,15 @@ var data_label: String = "FPS"
 #var perf_monitor_key: int = Performance.TIME_FPS
 var graph_size: Vector2 = DEFAULT_SIZE
 var perf_data_max: = 0.0
+var perf_data_min: = 1.0
 var data_scale: = 2.0
 var range_scale: = 1.0
 
 var plot_offset: = 0
 
 onready var label_node: Label = $Label
+onready var label_max_node: Label = $LabelMax
+onready var label_min_node: Label = $LabelMin
 onready var plot_data_array = plot_data_int
 
 
@@ -38,6 +43,7 @@ func init_plot(label: String, data_max: float, plot_length_frames: int = DEFAULT
 	plot_color = color
 	is_mem_size = is_humanise_needed
 	reset_max_data(data_max)
+	reset_min_data(DEFAULT_MIN_DATA)
 	if is_data_int:
 		plot_data_array = plot_data_int
 	else:
@@ -57,10 +63,15 @@ func get_data_str(data) -> String:
 func reset_max_data(data_max: float):
 	perf_data_max = data_max
 	update_scale()
-	$LabelMax.text = "max: " + get_data_str(perf_data_max)
+	label_max_node.text = "max: " + get_data_str(perf_data_max)
 
+func reset_min_data(data_min: float):
+	perf_data_min = data_min
+	label_min_node.text = "min: " + get_data_str(perf_data_min)
 
 func update_scale():
+	if perf_data_max == 0.0:
+		perf_data_max = MIN_DATA_MAX
 	data_scale = graph_size.y / float(perf_data_max)
 	range_scale = graph_size.x / float(plot_len)
 	
@@ -70,24 +81,28 @@ func init_data_array():
 	for i in range(plot_len):
 		plot_data_array[i] = 0
 
+
 func get_data():
 	return 0.0
+
 
 func _process(_delta):
 	resize_height()
 	plot_last_data = get_data()
 	if plot_last_data > perf_data_max:
 		reset_max_data(plot_last_data)
-	label_node.text = "%s: " % data_label + get_data_str(plot_last_data)
+	if plot_last_data < perf_data_min:
+		reset_min_data(plot_last_data)
+	label_node.text = data_label + ": " + get_data_str(plot_last_data)
 	if plot_data_array.size() == 0: 
 		return
 	plot_data_array[plot_pointer] = plot_last_data
 	update()
-	if plot_pointer < plot_len-1:
+	if plot_pointer < plot_len - 1:
 		plot_pointer += 1
 	else:
 		plot_pointer = 0
-	
+
 
 func _draw():
 	if plot_data_array.size() == 0:
@@ -105,3 +120,11 @@ func _draw():
 			draw_pointer += 1
 		else:
 			draw_pointer = 0
+
+
+func _on_MonitorPlotPanel_gui_input(event):
+	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
+		for i in range(plot_len):
+			plot_data_array[i] = 0.0
+		reset_max_data(get_data())
+		reset_min_data(get_data())
