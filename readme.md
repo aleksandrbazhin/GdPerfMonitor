@@ -14,25 +14,26 @@ Can display any **numeric** object parameter or function call result.
 
 - Add Monitor node to your scene tree
 
-- Setup what to monitor in one of 3 ways
+- Setup what to monitor
 
+  - ```python
+      $Monitor.os_time_per_frame()
+    ```
   - ```python
       $Monitor.add_perf_monitor(Performance.TIME_FPS, "FPS")
     ```
-  
   - ```python
       $Monitor.add_custom_monitor($Player, "hitpoints", "Player hp")
       # your $Player node must have "hitpoints" attribute, which must be either float or int
     ```
   - ```python  
-var render_info_funcref: FuncRef = funcref(VisualServer, "get_render_info")
-$Monitor.add_funcref_monitor(render_info_funcref, [VisualServer.INFO_TEXTURE_MEM_USED], "Texture mem")
-		```
-	
+      var render_info_funcref: FuncRef = funcref(VisualServer, "get_render_info")
+      $Monitor.add_funcref_monitor(render_info_funcref [VisualServer.INFO_TEXTURE_MEM_USED], "Texture mem")
+      ```
 
 Also you can set plot size, color, or amount of plot stored data, check out example.gd.
 
-There is also a convenience function `$Monitor.os_time_per_frame() `, which creates a monitor to show difference in `OS.get_ticks_usec()` between `_process()` calls.
+Convenience function `$Monitor.os_time_per_frame()`, creates a monitor to show difference in `OS.get_ticks_usec()` between `_process()` calls.
 
 ### Reference
 
