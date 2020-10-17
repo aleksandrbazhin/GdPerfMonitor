@@ -2,16 +2,12 @@ extends Control
 
 onready var monitor = $Monitor
 
-var last_usec: int = 0
-func get_frame_time() -> float:
-	var usec_delta: int = OS.get_ticks_usec() - last_usec
-	last_usec += usec_delta
-	return float(usec_delta) / 1000000.0
 
 func _ready():
-	# draws OS frame time, not interpolated
-	monitor.add_funcref_monitor(funcref(self, "get_frame_time"), [], "OS time / frame, s", 
-		Color(0.6, 0.4, 0.9, 0.6), false, false, 0.0)
+	# draws OS time between frames, not interpolated
+	monitor.os_time_per_frame()
+
+#	# add_perf_monitor adds anything from Performance Godot object
 #	monitor.add_perf_monitor(Performance.TIME_PROCESS, "Time process, s", 
 #		Color(0.2, 0.6, 0.95, 0.4), false, false, 0.0)
 #	monitor.add_perf_monitor(Performance.TIME_FPS, "FPS")

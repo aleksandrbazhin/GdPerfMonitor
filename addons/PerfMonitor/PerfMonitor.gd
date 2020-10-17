@@ -14,6 +14,23 @@ onready var plot_scene_funcref: PackedScene = preload("MonitorPlotPanelFuncref.t
 var plot_panels_node: HBoxContainer
 
 
+var last_usec: int = 0
+func get_frame_time() -> float:
+	var usec_delta: int = OS.get_ticks_usec() - last_usec
+	last_usec += usec_delta
+	return float(usec_delta) / 1000000.0
+
+
+# preset
+func os_time_per_frame():
+	add_funcref_monitor(funcref(self, "get_frame_time"), [], "OS time / frame, s", 
+		DEFAULT_PLOT_COLOR, false, false, 0.0)
+
+
+func _ready():
+	init_nodes()
+
+
 func init_nodes():
 	var margin_container = MarginContainer.new()
 	margin_container.set("custom_constants/margin_top", SCREEN_MARGIN)
@@ -25,10 +42,6 @@ func init_nodes():
 	margin_container.add_child(hbox_container)
 	add_child(margin_container)
 	plot_panels_node = hbox_container
-	
-
-func _ready():
-	init_nodes()
 
 
 func add_perf_monitor(param_key: int, 
