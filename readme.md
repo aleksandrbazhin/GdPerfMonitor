@@ -2,56 +2,91 @@
 
 Simple node for live monitoring of FPS, memory usage and such, loosely styled by Three.js's performance monitor.
 
-Also has the ability to monitor passed object's chosen parameter.
+![Example ](\screens\monitor.gif)
 
-![That's how it looks](monitor.gif)
+It may have some performance overhead (around 180 draw calls per frame, CPU and mem usage is slight), but for FPS or memory monitoring it seems insignificant.
 
-It may have some performance overhead (not measured), but for FPS or memory monitoring it seems insignificant.
+Can display any **numeric** object parameter or function call result.
 
 ### Usage
 
-- Copy PerfMonitor/ dir to the root of your project
+- Install from AssetLib
 
-- Add scene PerfMonitor.tscn to your project's main scene ![](add_scene.gif)
+- Add Monitor node to your scene tree
 
-- Setup what to monitor 
+- Setup what to monitor in one of 3 ways
 
-  - either inside PerfMonitor.gd _ready() function,  like 
-
-    ```python
-    func _ready():
-        add_perf_monitor(Performance.TIME_FPS, "FPS")
+  - ```python
+      $Monitor.add_perf_monitor(Performance.TIME_FPS, "FPS")
     ```
-
-    the keys of built-in Performance enum are found here https://docs.godotengine.org/ru/stable/classes/class_performance.html
-
-  - or in your code if you want to monitor your object's parameter. Object must be initialized before setting up plot, like
-
-    ```python
-    func _ready():
-        $PerfMonitor.add_custom_monitor($Player, "hitpoints", "Player hp")
-        # your $Player node must have "hitpoints" attribute, which must be either float or int
+  
+  - ```python
+      $Monitor.add_custom_monitor($Player, "hitpoints", "Player hp")
+      # your $Player node must have "hitpoints" attribute, which must be either float or int
     ```
-
-- Don't forget to add to .gitignore if you are using git something like
-
-``` 
-**/PerfMonitor/*
-```
-
-Also you can set plot size, color, or amount of plot stored data.  There are some commented examples PerfMonitor.gd
-
-**Update**:
-
-Added another kind of plot - funcref monitor which will call a function provided by passed FuncRef each frame. Example usage:
-
-```python
+  - ```python  
 var render_info_funcref: FuncRef = funcref(VisualServer, "get_render_info")
-add_funcref_monitor(render_info_funcref, [VisualServer.INFO_TEXTURE_MEM_USED], 
-		"Texture mem", Color(0.9, 0.9, 0.9, 0.6), true)
+$Monitor.add_funcref_monitor(render_info_funcref, [VisualServer.INFO_TEXTURE_MEM_USED], "Texture mem")
+		```
+	
+
+Also you can set plot size, color, or amount of plot stored data, check out example.gd.
+
+There is also a convenience function `$Monitor.os_time_per_frame() `, which creates a monitor to show difference in `OS.get_ticks_usec()` between `_process()` calls.
+
+### Reference
+
+
+```
+os_time_per_frame() - creates a plot panel to show difference between OS.get_ticks_usec() calls
 ```
 
-Only the first parameter to add_funcref_monitor (FuncRef itself ) is required, second parameter is Array of function call parameters, by default is empty. 
+
+```
+add_perf_monitor()
+# required
+	param_key: int - key from built-in Performance enum 
+# optional	
+	label: String = "" - label to display
+	color: Color = Color(0.2, 1, 0.2, 0.5) - color
+	humanise: bool = false - whether to use humanize for large numbers
+	is_data_int: bool = true - !important for floats change to false
+	max_value: float = 0.0 - maximum value
+	data_len: int = 180 
+	size_px: Vector2 = Vector2(180, 80)
+```
+
+
+```
+add_custom_monitor()
+# required
+	obj: Object - object to monitor
+	param_name: String - name of numeric attribute of the object above
+# optional	
+	label: String = "" - label to display
+	color: Color = Color(0.2, 1, 0.2, 0.5) - color
+	humanise: bool = false - whether to use humanize for large numbers
+	is_data_int: bool = true - !important for floats change to false
+	max_value: float = 0.0 - maximum value
+	data_len: int = 180 
+	size_px: Vector2 = Vector2(180, 80)
+```
+
+
+```
+add_funcref_monitor()
+# required
+	function_ref: FuncRef - funcref to a function that will be called every _process()
+# optional	
+	function_params: Array = [] - array of function param values
+	label: String = "" - label to display
+	color: Color = Color(0.2, 1, 0.2, 0.5) - color
+	humanise: bool = false - whether to use humanize for large numbers
+	is_data_int: bool = true - !important for floats change to false
+	max_value: float = 0.0 - maximum value
+	data_len: int = 180 
+	size_px: Vector2 = Vector2(180, 80)
+```
 
 ### Other notes
 
@@ -59,13 +94,9 @@ The draw call happens on _process, so update rate may be not constant.
 
 The plot uses some kind of ring buffer based on PoolIntArray or PoolRealArray for storing data. 
 
-There certainly are further optimizations, as I've wrote it during couple of night hours and then spent more time on making the gif in this readme.
-
 What may be optimized (questionable):
 
-- Not redraw plots every frame, but draw on texture, shift it and add one line each redraw
-- ~~Make less checks every frame by subclassing custom plot and performance plot from base plot~~ Done
+- Not redraw plots every frame, but draw on texture, shift it and add one line each redraw - tried it in a branch, did not succeed
 - Rewrite drawing with GDNative?
-- Make it a plugin
 
 
