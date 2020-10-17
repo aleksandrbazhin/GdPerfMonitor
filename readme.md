@@ -2,7 +2,7 @@
 
 Simple node for in-game monitoring of FPS, memory usage and such, loosely styled by Three.js's performance monitor.
 
-![Example ](\screens\monitor.gif)
+![Example ](screens\monitor.gif)
 
 It may have some performance overhead (around 180 draw calls per frame, CPU and mem usage is slight), but for FPS or memory monitoring it seems insignificant.
 
