@@ -37,56 +37,63 @@ There is also a convenience function `$Monitor.os_time_per_frame() `, which crea
 ### Reference
 
 
-```
-os_time_per_frame() - creates a plot panel to show difference between OS.get_ticks_usec() calls
-```
+- ```
+  os_time_perframe() - creates a plot panel to show difference between OS.get_ticks_usec() calls
+  ```
 
 
-```
-add_perf_monitor()
-# required
-	param_key: int - key from built-in Performance enum 
-# optional	
+- ```
+  add_perf_monitor() - creates a plot panel to monitor one of the built-in Performance enum 
+  
+	# required
+  param_key: int - key from Performance enum 
+	
+	# optional	
 	label: String = "" - label to display
 	color: Color = Color(0.2, 1, 0.2, 0.5) - color
 	humanise: bool = false - whether to use humanize for large numbers
 	is_data_int: bool = true - !important for floats change to false
 	max_value: float = 0.0 - maximum value
-	data_len: int = 180 
-	size_px: Vector2 = Vector2(180, 80)
-```
+  data_len: int = 180 
+  size_px: Vector2 = Vector2(180, 80)
+  ```
 
 
-```
-add_custom_monitor()
-# required
+- ```
+  add_custom_monitor() - creates a plot panel to monitor one of the passed objects' numeric attributes
+  
+	# required
 	obj: Object - object to monitor
-	param_name: String - name of numeric attribute of the object above
-# optional	
+  param_name: String - name of numeric attribute of the object above
+	
+	# optional	
 	label: String = "" - label to display
 	color: Color = Color(0.2, 1, 0.2, 0.5) - color
 	humanise: bool = false - whether to use humanize for large numbers
 	is_data_int: bool = true - !important for floats change to false
 	max_value: float = 0.0 - maximum value
-	data_len: int = 180 
-	size_px: Vector2 = Vector2(180, 80)
-```
+  data_len: int = 180 
+  size_px: Vector2 = Vector2(180, 80)
+  ```
 
 
-```
-add_funcref_monitor()
-# required
-	function_ref: FuncRef - funcref to a function that will be called every _process()
-# optional	
+- ```
+  add_funcref_monitor() - creates a plot panel to monitor results of the calls to the passed function
+  
+	# required
+  function_ref: FuncRef - funcref to a function that will be called every _process()
+	
+	# optional	
 	function_params: Array = [] - array of function param values
 	label: String = "" - label to display
 	color: Color = Color(0.2, 1, 0.2, 0.5) - color
 	humanise: bool = false - whether to use humanize for large numbers
 	is_data_int: bool = true - !important for floats change to false
 	max_value: float = 0.0 - maximum value
-	data_len: int = 180 
-	size_px: Vector2 = Vector2(180, 80)
-```
+  data_len: int = 180 
+  size_px: Vector2 = Vector2(180, 80)
+  ```
+  
 
 ### Other notes
 
@@ -94,9 +101,4 @@ The draw call happens on _process, so update rate may be not constant.
 
 The plot uses some kind of ring buffer based on PoolIntArray or PoolRealArray for storing data. 
 
-What may be optimized (questionable):
-
-- Not redraw plots every frame, but draw on texture, shift it and add one line each redraw - tried it in a branch, did not succeed
-- Rewrite drawing with GDNative?
-
-
+Rendering may be optimized.
