@@ -38,12 +38,12 @@ Convenience function `$Monitor.os_time_per_frame()`, creates a monitor to show d
 ### Reference
 
 
-- ```
+- ```Gdscript
 	os_time_perframe() - creates a plot panel to show difference between OS.get_ticks_usec() calls
   ```
 
 
-- ```
+- ```Gdscript
 	add_perf_monitor() - creates a plot panel to monitor one of the built-in Performance enum 
   
 	# required
@@ -60,7 +60,7 @@ Convenience function `$Monitor.os_time_per_frame()`, creates a monitor to show d
   ```
 
 
-- ```
+- ```Gdscript
 	add_custom_monitor() - creates a plot panel to monitor one of the passed objects' numeric attributes
   
 	# required
@@ -78,7 +78,7 @@ Convenience function `$Monitor.os_time_per_frame()`, creates a monitor to show d
   ```
 
 
-- ```
+- ```Gdscript
 	add_funcref_monitor() - creates a plot panel to monitor results of the calls to the passed function
   
 	# required
