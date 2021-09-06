@@ -39,58 +39,58 @@ Convenience function `$Monitor.os_time_per_frame()`, creates a monitor to show d
 
 
 - ```Gdscript
-	os_time_perframe() - creates a plot panel to show difference between OS.get_ticks_usec() calls
+	os_time_perframe() # creates a plot panel to show difference between OS.get_ticks_usec() calls
   ```
 
 
 - ```Gdscript
-	add_perf_monitor() - creates a plot panel to monitor one of the built-in Performance enum 
+	add_perf_monitor() # creates a plot panel to monitor one of the built-in Performance enum 
   
 	# required
-	param_key: int - key from Performance enum 
+	param_key: int # key from Performance enum 
 	
 	# optional	
-	label: String = "" - label to display
+	label: String = "" # label to display
 	color: Color = Color(0.2, 1, 0.2, 0.5) - color
-	humanise: bool = false - whether to use humanize for large numbers
-	is_data_int: bool = true - !important for floats change to false
-	max_value: float = 0.0 - maximum value
+	humanise: bool = false # whether to use humanize for large numbers
+	is_data_int: bool = true # !important for floats change to false
+	max_value: float = 0.0 # maximum value
 	data_len: int = 180 
 	size_px: Vector2 = Vector2(180, 80)
   ```
 
 
 - ```Gdscript
-	add_custom_monitor() - creates a plot panel to monitor one of the passed objects' numeric attributes
+	add_custom_monitor() # creates a plot panel to monitor one of the passed objects' numeric attributes
   
 	# required
-	obj: Object - object to monitor
-	param_name: String - name of numeric attribute of the object above
+	obj: Object # object to monitor
+	param_name: String # name of numeric attribute of the object above
 	
 	# optional	
-	label: String = "" - label to display
-	color: Color = Color(0.2, 1, 0.2, 0.5) - color
-	humanise: bool = false - whether to use humanize for large numbers
-	is_data_int: bool = true - !important for floats change to false
-	max_value: float = 0.0 - maximum value
+	label: String = "" # label to display
+	color: Color = Color(0.2, 1, 0.2, 0.5) # color
+	humanise: bool = false # whether to use humanize for large numbers
+	is_data_int: bool = true # !important for floats change to false
+	max_value: float = 0.0 # maximum value
 	data_len: int = 180 
 	size_px: Vector2 = Vector2(180, 80)
   ```
 
 
 - ```Gdscript
-	add_funcref_monitor() - creates a plot panel to monitor results of the calls to the passed function
+	add_funcref_monitor() # creates a plot panel to monitor results of the calls to the passed function
   
 	# required
-	function_ref: FuncRef - funcref to a function that will be called every _process()
+	function_ref: FuncRef # funcref to a function that will be called every _process()
 	
 	# optional	
-	function_params: Array = [] - array of function param values
-	label: String = "" - label to display
+	function_params: Array # [] - array of function param values
+	label: String = "" # label to display
 	color: Color = Color(0.2, 1, 0.2, 0.5) - color
-	humanise: bool = false - whether to use humanize for large numbers
-	is_data_int: bool = true - !important for floats change to false
-	max_value: float = 0.0 - maximum value
+	humanise: bool = false # whether to use humanize for large numbers
+	is_data_int: bool = true # !important for floats change to false
+	max_value: float = 0.0 # maximum value
 	data_len: int = 180 
 	size_px: Vector2 = Vector2(180, 80)
   ```
