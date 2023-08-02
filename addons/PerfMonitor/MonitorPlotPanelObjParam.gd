@@ -13,13 +13,13 @@ func setup_plot(object: Object, param_name: String, label: String, data_max: flo
 	if is_instance_valid(object):
 		custom_object_ref = weakref(object)
 		var object_param = object.get(param_name)
-		if object_param != null and [TYPE_INT, TYPE_REAL].has(typeof(object_param)):
+		if object_param != null and [TYPE_INT, TYPE_FLOAT].has(typeof(object_param)):
 			custom_object_parameter = param_name
 		else:
 			print("ERROR: passed non-number parameter to perf monitor")
 	else: 
 		print("ERROR: passed null object to perf monitor")
-	.init_plot(label, data_max, plot_length_frames, color, size, is_data_int, is_humanise_needed)
+	super.init_plot(label, data_max, plot_length_frames, color, size, is_data_int, is_humanise_needed)
 
 
 func get_data():

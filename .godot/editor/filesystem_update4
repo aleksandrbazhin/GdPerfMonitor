@@ -1,0 +1,5 @@
+res://example.tscn
+res://addons/PerfMonitor/MonitorPlotPanel.gd
+res://addons/PerfMonitor/MonitorPlotPanelFuncref.gd
+res://addons/PerfMonitor/PerfMonitor.gd
+res://example.gd

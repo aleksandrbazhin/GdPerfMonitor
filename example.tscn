@@ -1,13 +1,12 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://cmgqany0ps6lk"]
 
-[ext_resource path="res://example.gd" type="Script" id=1]
-[ext_resource path="res://addons/PerfMonitor/PerfMonitor.gd" type="Script" id=2]
+[ext_resource type="Script" path="res://example.gd" id="1"]
+[ext_resource type="Script" path="res://addons/PerfMonitor/PerfMonitor.gd" id="2"]
 
 [node name="Control" type="Control"]
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1")
 
 [node name="Monitor" type="CanvasLayer" parent="."]
-script = ExtResource( 2 )
+script = ExtResource("2")
