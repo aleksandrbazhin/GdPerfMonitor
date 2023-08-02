@@ -10,8 +10,8 @@ const DEFAULT_SIZE: = Vector2(180, 120)
 const DEFAULT_LEN: = 180
 const DEFAULT_COLOR: = Color(0.2, 1, 0.2, 0.5)
 
-var plot_data_int: PoolIntArray = []
-var plot_data_float: PoolRealArray = []
+var plot_data_int: PackedInt32Array = []
+var plot_data_float: PackedFloat32Array = []
 var plot_len: int = DEFAULT_LEN
 var plot_pointer: int = 0
 var plot_last_data: float = 0
@@ -26,10 +26,10 @@ var data_scale: = 2.0
 var range_scale: = 1.0
 var plot_offset: = 0
 
-onready var label_node: Label = $Label
-onready var label_max_node: Label = $LabelMax
-onready var label_min_node: Label = $LabelMin
-onready var plot_data_array = plot_data_int
+@onready var label_node: Label = $Label
+@onready var label_max_node: Label = $LabelMax
+@onready var label_min_node: Label = $LabelMin
+@onready var plot_data_array = plot_data_int
 
 
 func init_plot(label: String, data_max: float, plot_length_frames: int = DEFAULT_LEN, 
@@ -38,7 +38,7 @@ func init_plot(label: String, data_max: float, plot_length_frames: int = DEFAULT
 	plot_len = plot_length_frames
 	data_label = label
 	graph_size = size
-	rect_min_size = graph_size
+	custom_minimum_size = graph_size
 	resize_height()
 	plot_color = color
 	is_mem_size = is_humanise_needed
@@ -52,8 +52,8 @@ func init_plot(label: String, data_max: float, plot_length_frames: int = DEFAULT
 
 
 func resize_height():
-	if rect_min_size.y < rect_size.y:
-		plot_offset = int((rect_size.y - rect_min_size.y) / 2.0)
+	if custom_minimum_size.y < size.y:
+		plot_offset = int((size.y - custom_minimum_size.y) / 2.0)
 
 
 func get_data_str(data) -> String:
@@ -99,7 +99,7 @@ func _process(_delta):
 	if plot_data_array.size() == 0: 
 		return
 	plot_data_array[plot_pointer] = plot_last_data
-	update()
+	queue_redraw()
 	if plot_pointer < plot_len - 1:
 		plot_pointer += 1
 	else:
@@ -125,7 +125,7 @@ func _draw():
 
 
 func _on_MonitorPlotPanel_gui_input(event):
-	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		for i in range(plot_len):
 			plot_data_array[i] = 0.0
 		reset_max_data(get_data())
